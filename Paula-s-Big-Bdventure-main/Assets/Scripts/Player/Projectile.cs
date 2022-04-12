@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -10,21 +9,39 @@ public class Projectile : MonoBehaviour
    float force;
    public int healthDamage = 1;
    public Rigidbody rigidBody;
+   public float projectileSpeed=0f;
+   float time =0f; 
    //Cinemachine.CinemachineImpulseSource source;
 
-   private void Awake()
+   void Start()
    {
       rigidBody = GetComponent<Rigidbody>();
       rigidBody.centerOfMass = transform.position;
+      rigidBody.isKinematic = true;
+      time = 0f;
    }
-
-   //public void Fire()
-   //{
-   //   rigidBody.AddForce(transform.forward * (100 * Random.Range(1.3f, 1.7f)), ForceMode.Impulse);
-   //   source = GetComponent<Cinemachine.CinemachineImpulseSource>();
-   //   Vector3 velocity = Camera.main.transform.forward;
-   //   source.GenerateImpulse(velocity);
-   //}
+   void Update()
+   {
+      transform.position += transform.forward * projectileSpeed * Time.deltaTime;
+      time += Time.deltaTime;
+      if(time>=lifetime)
+      {
+         Destroy(gameObject);
+      }
+   }
+   void OnTriggerEnter(Collider other)
+   {
+      Debug.Log($"collision {other.gameObject.name}");
+      if (other.gameObject.CompareTag(Tags.enemies.ToString()))
+      {
+         Debug.Log($"enemy");
+         EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
+         //enemyHealth.DepleteHealth(healthDamage);
+         enemyHealth.GetKilled();
+         Destroy(gameObject);
+         AudioManager.instance.Play(GameSounds.EnemyIsHit);
+      }
+   }
 
    void OnCollisionEnter(Collision collision)
    {
@@ -32,18 +49,12 @@ public class Projectile : MonoBehaviour
       if (collision.gameObject.CompareTag(Tags.enemies.ToString()))
       {
          Debug.Log($"enemy");
-         rigidBody.isKinematic = true;
-
          EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
          //enemyHealth.DepleteHealth(healthDamage);
          enemyHealth.GetKilled();
-         StartCoroutine(Countdown());
+         Destroy(gameObject);
+         AudioManager.instance.Play(GameSounds.EnemyIsHit);
       }
-   }
-   IEnumerator Countdown()
-   {
-      yield return new WaitForSeconds(lifetime);
-      Destroy(gameObject);
    }
 }
 

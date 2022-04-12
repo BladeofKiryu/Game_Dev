@@ -11,14 +11,17 @@ public class EnemyHealth : MonoBehaviour
    float health = 10f;
    float maximumHealth;
    EnemyStockUp enemyStockUp;
+   public bool isAwaken;
+
    private void Awake()
    {
       maximumHealth = health;
       enemyStockUp = gameObject.GetComponent<EnemyStockUp>();
+      isAwaken = false;
    }
    void Update()
    {
-      if(enemyStockUp && !enemyStockUp.hasStockedUp)
+      if (enemyStockUp && !enemyStockUp.hasStockedUp)
       {
          enemyStockUp.StockUp();
       }
@@ -39,19 +42,25 @@ public class EnemyHealth : MonoBehaviour
 
    public void DepleteHealth(int healthDamage)
    {
-      health -= 1;
+      if (isAwaken)
+      {
+         health -= 1;
+      }
    }
 
    void Death()
    {
-      if (enemyStockUp && enemyStockUp.hasStockedUp)
+      if (isAwaken)
       {
-         enemyStockUp.DropItems();
+         if (enemyStockUp && enemyStockUp.hasStockedUp)
+         {
+            enemyStockUp.DropItems();
+         }
+         GameObject.Destroy(gameObject);
       }
-      GameObject.Destroy(gameObject);
    }
 
-   public  void GetKilled()
+   public void GetKilled()
    {
       Death();
    }

@@ -15,11 +15,24 @@ public class PlayerHealth : MonoBehaviour
    {
       health = maximumHealth;
       HideSword();
+      SceneLoader.instance.AssignPlayer(gameObject);
+      if (PlayerData.current != null)
+      {
+         if (PlayerData.current.healthData > 0)
+         {
+            health = PlayerData.current.healthData;
+         }
+      }
+      AudioManager.instance.Play(GameSounds.SceneBackground);
    }
 
    //Update is called once per frame
    void Update()
    {
+      if (Time.timeScale == 0f)
+      {
+         return;
+      }
       UpdateHUD();
 
       if (health <= 0)

@@ -9,7 +9,7 @@ public class PlayerShootProjectile : MonoBehaviour
    public GameObject projectile;
    float nextShot = 0.0f;
    float timeBetweenShots = 0.2f;
-
+   float projectileLifetime = 2f;
    void Fire()
    {
       PlayerInteraction playerInteraction = gameObject.GetComponent<PlayerInteraction>();
@@ -17,19 +17,7 @@ public class PlayerShootProjectile : MonoBehaviour
       {
          //if (playerInteraction.manaSlot.slotItem)  
          {
-            GameObject swordGrip = GameObject.FindGameObjectWithTag("SwordGrip");
-            //Transform magicPoint = gameObject.transform;
-            //foreach (Transform child in gameObject.transform)
-            //{
-            //   if (child.name == "MagicPoint")
-            //   {
-            //      magicPoint = child;
-            //      break;
-            //   }
-            //}
 
-            if (swordGrip)
-            {
                Vector3 barrelEnd = transform.position + transform.forward * 1f + new Vector3(0, 2f, 0);
                foreach (Transform child in gameObject.transform.GetComponentsInChildren<Transform>())
                {
@@ -47,16 +35,22 @@ public class PlayerShootProjectile : MonoBehaviour
                //GameObject projectileClone = Instantiate(projectile, swordGrip.transform.position, swordGrip.transform.rotation);
                GameObject projectileClone = Instantiate(projectile, barrelEnd, transform.rotation);
                //projectileClone.transform.position = new Vector3(projectileClone.transform.position.x, projectileClone.transform.position.y * 0.1f, projectileClone.transform.position.z);
-               projectileClone.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
-               //playerInteraction.manaSlot.RemoveItem();
-               //coolDown = Time.time + projectileSpeed;
-            }
+               //projectileClone.GetComponent<Rigidbody>().velocity = transform.forward * projectileSpeed;
+            //Set speed
+            projectileClone.GetComponent<Projectile>().projectileSpeed = projectileSpeed;
+            //playerInteraction.manaSlot.RemoveItem();
+            //coolDown = Time.time + projectileSpeed;
+            Destroy(projectileClone, projectileLifetime);
          }
       }
    }
 
    void Update()
    {
+      if (Time.timeScale == 0f)
+      {
+         return;
+      }
       Keyboard keyboard = Keyboard.current;
       Mouse mouse = Mouse.current;
       if (Time.time > nextShot)

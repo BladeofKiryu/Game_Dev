@@ -216,14 +216,63 @@ public class PlayerInteraction : MonoBehaviour
             swordPickup.playerHealth.ShowSword();
          }
          Debug.Log("Spawning");
-         SpawnEnemiesToPoints spawnEnemiesToPoints = itemObject.GetComponent<SpawnEnemiesToPoints>();
-         if (spawnEnemiesToPoints)
-         {
-            itemObject.GetComponent<SpawnEnemiesToPoints>().Execute();
-            //itemObject.SetActive(false);
 
+         GameObject enemies = GameObject.Find("Enemies");
+         if (enemies)
+         {
+            Debug.Log("Enemies");
+            foreach (Transform child in enemies.transform.GetComponentsInChildren<Transform>())
+            {
+               Debug.Log($"\t{child.name}");
+               if (child.gameObject.CompareTag(Tags.enemies.ToString()))
+               {
+                  Debug.Log($"\tTag \t{child.name}");
+                  EnemyMovementAI enemyMovementAI = child.gameObject.GetComponent<EnemyMovementAI>();
+                  if(enemyMovementAI)
+                  {
+                     Debug.Log($"\tgolem");
+                     enemyMovementAI.AwakeTheGolem();
+                  }
+               }
+            }
          }
       }
       
    }
+
+   public void SetPlayerData(PlayerData playerData)
+   {
+      PlayerHealth playerHealth = gameObject.GetComponent<PlayerHealth>();
+      if (playerHealth)
+      {
+         playerHealth.health = playerData.healthData;
+      }
+      // public bool hasSwordData;
+
+      //public int keySlotData;
+      //public int manaSlotData;
+      //public int ammoSlotData;
+      //public int healthPotionSlotData;
+      //public int permaHealthSlotData;
+}
+   public PlayerData GetPlayerData()
+   {
+      PlayerData playerData = new PlayerData();
+      {
+         // public bool hasSwordData;
+ 
+         //public int keySlotData;
+         //public int manaSlotData;
+         //public int ammoSlotData;
+         //public int healthPotionSlotData;
+         //public int permaHealthSlotData;
+      }
+      PlayerHealth playerHealth = gameObject.GetComponent<PlayerHealth>();
+      if (playerHealth)
+      {
+         playerData.healthData = playerHealth.health;
+      }
+      return playerData;
+   }
+
 }

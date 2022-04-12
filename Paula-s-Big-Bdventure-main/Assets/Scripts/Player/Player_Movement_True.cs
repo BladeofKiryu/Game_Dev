@@ -11,8 +11,10 @@ public class Player_Movement_True : MonoBehaviour
    public float jumpSpeed = 8.0f;
    public float gravity = 20.0f;
    public Transform playerCameraParent;
-   public float lookSpeed = 2.0f;
    public float lookXLimit = 60.0f;
+   private float turner;
+   private float looker;
+   public float sensitivity = 2.0f;
 
    CharacterController characterController;
    Vector3 moveDirection = Vector3.zero;
@@ -28,6 +30,10 @@ public class Player_Movement_True : MonoBehaviour
 
    void Update()
    {
+      if (SceneLoader.instance == null)
+      {
+         return;
+      }
       // Control input with WASD + Mouse
       Keyboard keyboard = Keyboard.current;
       Mouse mouse = Mouse.current;
@@ -50,6 +56,18 @@ public class Player_Movement_True : MonoBehaviour
          }
       }
 
+      turner = mouse.delta.x.ReadValue() * PlayerData.current.CameraSensitivity * SceneLoader.instance.MaxCameraSensitivity;
+      looker = -mouse.delta.y.ReadValue() * PlayerData.current.CameraSensitivity * SceneLoader.instance.MaxCameraSensitivity;
+      if (turner != 0)
+      {
+         //Code for action on mouse moving right
+         transform.eulerAngles += new Vector3(0, turner, 0);
+      }
+      if (looker != 0)
+      {
+         //Code for action on mouse moving right
+         transform.eulerAngles += new Vector3(looker, 0, 0);
+      }
       // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
       // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied
       // as an acceleration (ms^-2)
@@ -61,8 +79,8 @@ public class Player_Movement_True : MonoBehaviour
       // Player and Camera rotation
       if (canMove)
       {
-         rotation.y += mouse.delta.x.ReadValue() * lookSpeed;
-         rotation.x += -mouse.delta.y.ReadValue() * lookSpeed;
+         rotation.y += turner;
+         rotation.x += -looker;
          rotation.x = Mathf.Clamp(rotation.x, -lookXLimit, lookXLimit);
          playerCameraParent.localRotation = Quaternion.Euler(rotation.x, 0, 0);
          transform.eulerAngles = new Vector2(0, rotation.y);

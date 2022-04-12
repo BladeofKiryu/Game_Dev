@@ -6,10 +6,10 @@ public class EnteringCemetryTrigger : MonoBehaviour
 {
    private void OnTriggerEnter(Collider other)
    {
-      if(other.gameObject.CompareTag("Player"))
+      if (other.gameObject.CompareTag(Tags.Player.ToString()))
       {
          //save prefs to be retrieve on the other side
-         SceneLoader.Load(SceneLoader.Scene.Cemetery);
+         SceneLoader.instance.Load(SceneLoader.Scene.Cemetery);
       }
    }
 }

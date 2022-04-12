@@ -31,4 +31,9 @@ public class SpawnEnemiesToPoints : MonoBehaviour
          enableSpawning = false;
       }
    }
+   public void CreateStatues()
+   {
+      enableSpawning = true;
+      Execute();
+   }
 }
