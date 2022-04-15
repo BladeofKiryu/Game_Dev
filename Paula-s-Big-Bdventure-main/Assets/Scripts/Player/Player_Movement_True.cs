@@ -22,6 +22,20 @@ public class Player_Movement_True : MonoBehaviour
 
    [HideInInspector]
    public bool canMove = true;
+
+   private void Awake()
+   {
+      GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+   }
+   void OnDestroy()
+   {
+      GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+   }
+   private void OnGameStateChanged(GameState newGameState)
+   {
+      enabled = (newGameState == GameState.GamePlay);
+   }
+
    void Start()
    {
       characterController = GetComponent<CharacterController>();
@@ -56,8 +70,8 @@ public class Player_Movement_True : MonoBehaviour
          }
       }
 
-      turner = mouse.delta.x.ReadValue() * PlayerData.current.CameraSensitivity * SceneLoader.instance.MaxCameraSensitivity;
-      looker = -mouse.delta.y.ReadValue() * PlayerData.current.CameraSensitivity * SceneLoader.instance.MaxCameraSensitivity;
+      turner = mouse.delta.x.ReadValue();// * PlayerData.current.CameraSensitivity * SceneLoader.instance.MaxCameraSensitivity;
+      looker = mouse.delta.y.ReadValue();// * PlayerData.current.CameraSensitivity * SceneLoader.instance.MaxCameraSensitivity;
       if (turner != 0)
       {
          //Code for action on mouse moving right

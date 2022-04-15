@@ -373,7 +373,7 @@ public class EnemyMovementAI : MonoBehaviour
       if (enemyHealth)
       {
          Debug.Log("Awaken!!");
-         enemyHealth.isAwaken = isAwaken;
+         //enemyHealth.isAwaken = isAwaken;
       }
    }
 }

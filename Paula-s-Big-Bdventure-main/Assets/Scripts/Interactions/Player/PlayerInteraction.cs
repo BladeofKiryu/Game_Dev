@@ -39,6 +39,7 @@ public class PlayerInteraction : MonoBehaviour
                case InteractionType.Picking:
                case InteractionType.Dropping:
                   {
+                     currentInteractionObject.SetActive(false);
                      if (!TryAddItem(currentInteractionObject))
                      {
                         currentInteractionScript.DoFlashAndDie();
@@ -155,7 +156,8 @@ public class PlayerInteraction : MonoBehaviour
          Debug.Log($"Player detect interaction object {other.name}");
          currentInteractionObject = other.gameObject;
          currentInteractionScript = other.gameObject.GetComponent<InteractionObject>();
-         if(currentInteractionScript)
+         Debug.Log($"interaction object type {currentInteractionScript.interactionType}");
+         if (currentInteractionScript)
          {
             if(currentInteractionScript.interactionFeedback)
             {
