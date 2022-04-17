@@ -10,6 +10,8 @@ public class PauseMenuScript : MonoBehaviour
 
    public void GoToMainMenu()
    {
+      GameStateManager.Instance.SetState(GameState.GamePlay);
+      SetGameObjectState(pauseMenuUI, false);
       SceneLoader.instance.Load(SceneLoader.Scene.MainMenu);
       Debug.Log("Go To Main Menu");
    }
@@ -22,12 +24,12 @@ public class PauseMenuScript : MonoBehaviour
 
    public void CloseOptionsMenu()
    {
-      if (PlayerData.current != null)
-      {
-         PlayerData.current.AudioVolume = SceneLoader.instance.AudioVolume.value;
-         PlayerData.current.EFXVolume = SceneLoader.instance.EFXVolume.value;
-         PlayerData.current.CameraSensitivity = SceneLoader.instance.CameraSensitivity.value;
-      }
+      //if (PlayerData.current != null)
+      //{
+         SceneLoader.instance.AudioVolume = SceneLoader.instance.AudioVolumeSlider.value;
+         SceneLoader.instance.EFXVolume = SceneLoader.instance.EFXVolumeSlider.value;
+         SceneLoader.instance.CameraSensitivity = SceneLoader.instance.CameraSensitivitySlider.value;
+      //}
       SetGameObjectState(pauseMenuUI, true);
       SetGameObjectState(optionsMenuUI, false);
    }

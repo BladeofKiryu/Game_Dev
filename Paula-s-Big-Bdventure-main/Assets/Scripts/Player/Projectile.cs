@@ -36,8 +36,8 @@ public class Projectile : MonoBehaviour
       {
          Debug.Log($"enemy");
          EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-         //enemyHealth.DepleteHealth(healthDamage);
-         enemyHealth.GetKilled();
+         enemyHealth.DepleteHealth(healthDamage);
+         //enemyHealth.GetKilled();
          Destroy(gameObject);
          AudioManager.instance.Play(GameSounds.EnemyIsHit);
       }
@@ -50,8 +50,8 @@ public class Projectile : MonoBehaviour
       {
          Debug.Log($"enemy");
          EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
-         //enemyHealth.DepleteHealth(healthDamage);
-         enemyHealth.GetKilled();
+         enemyHealth.DepleteHealth(healthDamage);
+         //enemyHealth.GetKilled();
          Destroy(gameObject);
          AudioManager.instance.Play(GameSounds.EnemyIsHit);
       }

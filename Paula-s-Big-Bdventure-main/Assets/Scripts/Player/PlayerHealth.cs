@@ -70,6 +70,7 @@ public class PlayerHealth : MonoBehaviour
    {
       Debug.Log("PLAYER IS KILLED");
       GameObject.Destroy(gameObject);
+      SceneLoader.instance.Load(SceneLoader.Scene.MainMenu);
    }
    public void BoostHealth()
    {

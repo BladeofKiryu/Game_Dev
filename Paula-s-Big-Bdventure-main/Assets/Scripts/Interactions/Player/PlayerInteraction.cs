@@ -10,9 +10,10 @@ public class PlayerInteraction : MonoBehaviour
    [SerializeField] private GameObject interactionIcon;
    public ItemSlot keySlot;
    public ItemSlot manaSlot;
-   public ItemSlot ammoSlot;
+   //public ItemSlot ammoSlot;
    public ItemSlot healthPotionSlot;
    public ItemSlot permaHealthSlot;
+   public int boostHealth = 1;
    void Start()
    {
    }
@@ -24,7 +25,7 @@ public class PlayerInteraction : MonoBehaviour
       if (currentInteractionScript && currentInteractionObject)
       {
          bool automaticPickup = (currentInteractionScript.interactionType == InteractionType.Dropping);
-         if (automaticPickup || (keyboard.eKey.ReadValue() > 0f) && currentInteractionObject)
+         if (automaticPickup || (keyboard.eKey.wasPressedThisFrame) && currentInteractionObject)
          {
             bool playAdditionalInteractions = false;
             switch (currentInteractionScript.interactionType)
@@ -44,6 +45,17 @@ public class PlayerInteraction : MonoBehaviour
                      {
                         currentInteractionScript.DoFlashAndDie();
                      }
+
+                     var bCol = currentInteractionObject.AddComponent<BoxCollider>();
+                     bCol.enabled = false;
+                     bCol.isTrigger = false;
+
+                     var comp = currentInteractionObject.GetComponent<InteractionObject>();
+                     if(comp != null)
+                     {
+                        comp.enabled = false;
+                     }
+                     currentInteractionScript = null;
                      break;
                   }
                case InteractionType.Entry:
@@ -80,15 +92,14 @@ public class PlayerInteraction : MonoBehaviour
                }
             }
          }
+      }
+      if (keyboard.digit1Key.wasPressedThisFrame)
+      {
+         DoBoostHealth();
+      }
+      else if (keyboard.digit2Key.wasPressedThisFrame)
+      {
 
-         if (keyboard.digit1Key.ReadValue() > 0f)
-         {
-            DoBoostHealth();
-         }
-         else if (keyboard.digit2Key.ReadValue() > 0f)
-         {
-
-         }
       }
    }
 
@@ -104,8 +115,7 @@ public class PlayerInteraction : MonoBehaviour
    private void DoBoostHealth()
    {
       //Search the interaction inventory for the item needed - of found unlock object
-      StockItem healthPotionItem = healthPotionSlot.GetComponent<StockItem>();
-      if (healthPotionItem.quantity > 0)
+      if (healthPotionSlot.slotItem != null)
       {
          healthPotionSlot.RemoveItem();
          PlayerHealth playerHealth = gameObject.GetComponent<PlayerHealth>();
@@ -187,7 +197,7 @@ public class PlayerInteraction : MonoBehaviour
    {
       return AddToSlot(keySlot, itemObject) ||
       AddToSlot(manaSlot, itemObject) ||
-      AddToSlot(ammoSlot, itemObject) ||
+      //AddToSlot(ammoSlot, itemObject) ||
       AddToSlot(healthPotionSlot, itemObject) ||
       AddToSlot(permaHealthSlot, itemObject);
    }

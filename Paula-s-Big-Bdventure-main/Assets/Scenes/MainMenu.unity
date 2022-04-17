@@ -3209,16 +3209,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3379159950274301371, guid: 89c89ad257355e04c8f1a0e8aa8698be, type: 3}
       propertyPath: EFXVolume
-      value: 
-      objectReference: {fileID: 946079559}
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3379159950274301371, guid: 89c89ad257355e04c8f1a0e8aa8698be, type: 3}
       propertyPath: AudioVolume
-      value: 
-      objectReference: {fileID: 2085069711}
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3379159950274301371, guid: 89c89ad257355e04c8f1a0e8aa8698be, type: 3}
       propertyPath: CameraSensitivity
-      value: 
-      objectReference: {fileID: 498456388}
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3379159950274301371, guid: 89c89ad257355e04c8f1a0e8aa8698be, type: 3}
+      propertyPath: MaxCameraSensitivity
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5546752133643926526, guid: 89c89ad257355e04c8f1a0e8aa8698be, type: 3}
       propertyPath: m_Name
       value: SceneObjectLoader

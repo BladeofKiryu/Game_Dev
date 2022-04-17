@@ -560,11 +560,11 @@ MonoBehaviour:
   currentInteractionObject: {fileID: 0}
   currentInteractionScript: {fileID: 0}
   interactionIcon: {fileID: 0}
-  keySlot: {fileID: 0}
-  manaSlot: {fileID: 0}
-  ammoSlot: {fileID: 0}
-  healthPotionSlot: {fileID: 0}
-  permaHealthSlot: {fileID: 0}
+  keySlot: {fileID: 1537281548}
+  manaSlot: {fileID: 563223095}
+  healthPotionSlot: {fileID: 1474814958}
+  permaHealthSlot: {fileID: 1610043147}
+  boostHealth: 1
 --- !u!143 &217803941
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1432,7 +1432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundCatalog:
   - whichSound: 0
-    clip: {fileID: 8300000, guid: d3dd5619e2ef4fe4b99ddaf109bca03b, type: 3}
+    clip: {fileID: 8300000, guid: c0cff8db30727c840ab69a18c271b5fc, type: 3}
     volume: 1
     pitch: 0.13
     loop: 1
@@ -1557,7 +1557,7 @@ RectTransform:
   m_GameObject: {fileID: 563223093}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.41911033, y: 0.41911033, z: 0.5541222}
+  m_LocalScale: {x: 0.41911033, y: 0.46102136, z: 0.5541222}
   m_Children: []
   m_Father: {fileID: 1066886316}
   m_RootOrder: 4
@@ -1602,7 +1602,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2caf275dae5ef784cb1c92679bf36822, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c6307a9b479d874b9a1b58140082dd0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2343,7 +2343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8f559a45b0327e4e8c20520bec3d848, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.38
+      value: -0.281
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8f559a45b0327e4e8c20520bec3d848, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2351,7 +2351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8f559a45b0327e4e8c20520bec3d848, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.75
+      value: -23.752
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8f559a45b0327e4e8c20520bec3d848, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3202,6 +3202,25 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e8f559a45b0327e4e8c20520bec3d848, type: 3}
   m_PrefabInstance: {fileID: 735817527}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &928951025
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 928951024}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52126e334cc5834459fed3056be65bd0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!64 &928951028
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3211,7 +3230,7 @@ MeshCollider:
   m_GameObject: {fileID: 928951024}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -5167,14 +5186,14 @@ RectTransform:
   m_GameObject: {fileID: 1080789859}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.41911033, y: 0.41911033, z: 0.5541222}
+  m_LocalScale: {x: 0.4501664, y: 0.4501664, z: 0.59518266}
   m_Children: []
   m_Father: {fileID: 1066886316}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 147.95062, y: -268.71048}
+  m_AnchoredPosition: {x: 148.4, y: -273.6}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1080789861
@@ -6479,7 +6498,7 @@ RectTransform:
   m_GameObject: {fileID: 1474814956}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7076107, y: 0.42885494, z: 0.42885494}
+  m_LocalScale: {x: 0.59262395, y: 0.46637973, z: 0.42885494}
   m_Children: []
   m_Father: {fileID: 1066886316}
   m_RootOrder: 0
@@ -6524,7 +6543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 93ce0963b91a0fb42974081d2e40b63f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 36e6f17b50352ff438ed5fb823933c07, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6608,7 +6627,7 @@ RectTransform:
   m_GameObject: {fileID: 1537281546}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.41911033, y: 0.41911033, z: 0.5541222}
+  m_LocalScale: {x: 0.44425693, y: 0.44425693, z: 0.5873695}
   m_Children: []
   m_Father: {fileID: 1066886316}
   m_RootOrder: 3
@@ -6653,7 +6672,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 161317cf49dd2d745a3e6ddc4ef267a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2499a1e14d85d3048bdb407a65070b63, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7129,14 +7148,14 @@ RectTransform:
   m_GameObject: {fileID: 1610043145}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.41911033, y: 0.41911033, z: 0.5541222}
+  m_LocalScale: {x: 0.4543575, y: 0.4543575, z: 0.60072386}
   m_Children: []
   m_Father: {fileID: 1066886316}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58.73694, y: -275.95285}
+  m_AnchoredPosition: {x: 58.73694, y: -273.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610043147
@@ -7174,7 +7193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 25725bdfe5049214cac4a094bb745063, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06458379f865cf04cbd288c660a71e91, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8271,6 +8290,63 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1788611238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1788611241}
+  - component: {fileID: 1788611240}
+  - component: {fileID: 1788611239}
+  m_Layer: 0
+  m_Name: PauseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1788611239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788611238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551ea9682cf3b7e45b728d0d1ce17ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuUI: {fileID: 987159318}
+--- !u!114 &1788611240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788611238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 925d4bc95ca133047909604f1cce61f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1788611241
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788611238}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1825822261
 GameObject:
   m_ObjectHideFlags: 0
@@ -9344,9 +9420,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1066886312}
-        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: StartMenu
+      - m_Target: {fileID: 1066886311}
+        m_TargetAssemblyTypeName: PauseMenuScript, Assembly-CSharp
+        m_MethodName: GoToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -10,6 +10,20 @@ public class PlayerShootProjectile : MonoBehaviour
    float nextShot = 0.0f;
    float timeBetweenShots = 0.2f;
    float projectileLifetime = 2f;
+   
+   
+   private void Awake()
+   {
+      GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+   }
+   void OnDestroy()
+   {
+      GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+   }
+   private void OnGameStateChanged(GameState newGameState)
+   {
+      enabled = (newGameState == GameState.GamePlay);
+   }
    void Fire()
    {
       PlayerInteraction playerInteraction = gameObject.GetComponent<PlayerInteraction>();

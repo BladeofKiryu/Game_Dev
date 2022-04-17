@@ -24,11 +24,19 @@ public class EnemyMovementAI : MonoBehaviour
 
    void Awake()
    {
+      GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
       navigationAgent = GetComponent<NavMeshAgent>();
       movementCategory = MovementCategoryOptions.AttackingAPlayer;
       isAwaken = false;
    }
-
+   void OnDestroy()
+   {
+      GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+   }
+   private void OnGameStateChanged(GameState newGameState)
+   {
+      enabled = (newGameState == GameState.GamePlay);
+   }
    void Update()
    {
       if (!isAwaken)

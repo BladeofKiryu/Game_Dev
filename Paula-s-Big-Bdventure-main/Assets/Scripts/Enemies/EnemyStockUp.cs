@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,23 +7,30 @@ public class EnemyStockUp : MonoBehaviour
 {
    [SerializeField] private List<GameObject> stockItems;
    [SerializeField] private int capacity = 10;
-   [SerializeField] private int ammoMaxStock = 1;
-   [SerializeField] private int manaMaxStock = 1;
-   [SerializeField] private int healthPotionMaxStock = 1;
-   [SerializeField] private int permaHealthMaxStock = 1;
-   [SerializeField] private GameObject ammoObject;
+   //[SerializeField] private int ammoMaxStock = 1;
+   private int manaMaxStock = 1;
+   private int healthPotionMaxStock = 1;
+   private int permaHealthMaxStock = 1;
+   //[SerializeField] private GameObject ammoObject;
    [SerializeField] private GameObject manaObject;
    [SerializeField] private GameObject healthPotionObject;
    [SerializeField] private GameObject permaHealthObject;
    public bool hasStockedUp = false;
    public void StockUp()
    {
+      capacity = 1;
       hasStockedUp = true;
       stockItems = new List<GameObject>();
-      ExecuteStockUpOn(ammoObject, ammoMaxStock);
-      ExecuteStockUpOn(manaObject, manaMaxStock);
-      ExecuteStockUpOn(healthPotionObject, healthPotionMaxStock);
-      ExecuteStockUpOn(permaHealthObject, permaHealthMaxStock);
+      //ExecuteStockUpOn(ammoObject, ammoMaxStock);
+      UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
+      int selection = UnityEngine.Random.Range(0, 3);
+      selection = 1;
+      switch (selection)
+      {
+         case 0: ExecuteStockUpOn(manaObject, manaMaxStock); break;
+         case 1: ExecuteStockUpOn(healthPotionObject, healthPotionMaxStock); break;
+         case 2: ExecuteStockUpOn(permaHealthObject, permaHealthMaxStock); break;
+      }
    }
    public void DropItems()
    {
@@ -41,8 +49,8 @@ public class EnemyStockUp : MonoBehaviour
          bCol.isTrigger = true;
 
          var rb = dropping.AddComponent<Rigidbody>();
-         rb.isKinematic = true;
-         rb.useGravity = false;
+         //rb.isKinematic = true;
+         rb.useGravity = true;
          dropping.AddComponent<InteractionObject>();
 
          InteractionObject interactionObject = dropping.GetComponent<InteractionObject>();
@@ -59,17 +67,13 @@ public class EnemyStockUp : MonoBehaviour
       Debug.Log($"Stock {stockItems.Count} {capacity} {maximum}");
       if (stockItems.Count < capacity)
       {
-         int count = Random.Range(1, maximum);
-         if (count > 0)
+         GameObject clone = Instantiate(stockItemObject, transform.position, transform.rotation, gameObject.transform);
+         StockItem stockItem = clone.GetComponent<StockItem>();
+         if (stockItem)
          {
-            GameObject clone = Instantiate(stockItemObject, transform.position, transform.rotation,gameObject.transform);
-            StockItem stockItem = clone.GetComponent<StockItem>();
-            if (stockItem)
-            {
-               clone.SetActive(false);
-               stockItem.quantity = count;
-               stockItems.Add(clone);
-            }
+            clone.SetActive(false);
+            stockItem.quantity = 1;
+            stockItems.Add(clone);
          }
       }
    }
@@ -77,9 +81,9 @@ public class EnemyStockUp : MonoBehaviour
    Vector3 GeneratedPosition(Vector3 centralPosition)
    {
       float x, y, z;
-      x = Random.Range(-3f, 3f);
+      x = UnityEngine.Random.Range(-3f, 3f);
       y = 0f;
-      z = Random.Range(-3f, 3f);
+      z = UnityEngine.Random.Range(-3f, 3f);
       return new Vector3(x, y, z) + centralPosition;
    }
 }

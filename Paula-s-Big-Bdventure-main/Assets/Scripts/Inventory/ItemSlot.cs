@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+[System.Serializable]
 public class ItemSlot : MonoBehaviour
 {
    public GameObject slotItem;
@@ -35,8 +35,9 @@ public class ItemSlot : MonoBehaviour
    {
       bool result = false;
       StockItem stockItem = itemObject.GetComponent<StockItem>();
-      if (stockItem && slotStockItem.ItemType.Equals(slotStockItem.ItemType))
+      if (stockItem && stockItem.ItemType.Equals(slotStockItem.ItemType))
       {
+         Debug.Log($"Add item {slotStockItem.ItemType}");
          slotStockItem.quantity += stockItem.quantity;
          result = true;
       }
