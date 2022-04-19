@@ -6,15 +6,21 @@ public class MainMenu : MonoBehaviour
 
    public GameObject mainMenu;
    public GameObject levelMenu;
+   public GameObject optionsMenu;
+
+   private void Awake()
+   {
+      SetGameObjectState(mainMenu, true);
+      SetGameObjectState(levelMenu, false);
+      SetGameObjectState(optionsMenu, false);
+   }
    public void StartGame()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load (SceneLoader.Scene.Cemetery);
       Debug.Log("Start Game");
    }
    public void StartMenu()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load(SceneLoader.Scene.MainMenu);
       Debug.Log("Main Menu");
    }
@@ -28,37 +34,31 @@ public class MainMenu : MonoBehaviour
 
    public void GoToCemetery()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load(SceneLoader.Scene.Cemetery);
    }
 
    public void GoToCouncilRoom()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load(SceneLoader.Scene.CouncilRoom);
    }
 
    public void GoToFirstFloor()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load(SceneLoader.Scene.FirstFloor);
    }
 
    public void GoToSecondFloor()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load(SceneLoader.Scene.SecondFloor);
    }
 
    public void GoToThirdFloor()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load(SceneLoader.Scene.ThirdFloor);
    }
 
    public void GoToThrone()
    {
-      InitializePlayerData();
       SceneLoader.instance.Load(SceneLoader.Scene.Throne);
    }
 
@@ -66,24 +66,39 @@ public class MainMenu : MonoBehaviour
    {
       if(mainMenu && levelMenu)
       {
-         mainMenu.SetActive(false);
-         levelMenu.SetActive(true);
+         SetGameObjectState(mainMenu, false);
+         SetGameObjectState(levelMenu, true);
       }
    }
    public void ShowMainMenu()
    {
-      if (mainMenu && levelMenu)
+      if (mainMenu && levelMenu && optionsMenu)
       {
-         mainMenu.SetActive(true);
-         levelMenu.SetActive(false);
+         SceneLoader.instance.AudioVolume = SceneLoader.instance.AudioVolumeSlider.value;
+         SceneLoader.instance.EFXVolume = SceneLoader.instance.EFXVolumeSlider.value;
+         SceneLoader.instance.CameraSensitivity = SceneLoader.instance.CameraSensitivitySlider.value;
+         SetGameObjectState(mainMenu, true);
+         SetGameObjectState(levelMenu, false);
+         SetGameObjectState(optionsMenu, false);
       }
    }
-   void InitializePlayerData()
+   public void ShowOptionsMenu()
    {
-      if (PlayerData.current == null)
+      if (mainMenu && optionsMenu)
       {
-         PlayerData.current = new PlayerData();
+         SceneLoader.instance.AudioVolumeSlider.value = SceneLoader.instance.AudioVolume;
+         SceneLoader.instance.EFXVolumeSlider.value = SceneLoader.instance.EFXVolume;
+         SceneLoader.instance.CameraSensitivitySlider.value = SceneLoader.instance.CameraSensitivity;
+         SetGameObjectState(mainMenu, false);
+         SetGameObjectState(levelMenu, false);
+         SetGameObjectState(optionsMenu, true);
       }
-      SaveLoadData.Save();
+   }
+   void SetGameObjectState(GameObject obj, bool state)
+   {
+      if (obj)
+      {
+         obj.SetActive(state);
+      }
    }
 }

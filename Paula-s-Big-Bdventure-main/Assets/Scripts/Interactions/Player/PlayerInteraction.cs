@@ -224,6 +224,7 @@ public class PlayerInteraction : MonoBehaviour
          Debug.Log("Sword pick up");
          if (swordPickup.playerHealth)
          {
+            SceneLoader.instance.playerHasPickedSword = true;
             swordPickup.Execute();
             swordPickup.playerHealth.ShowSword();
          }
@@ -251,40 +252,4 @@ public class PlayerInteraction : MonoBehaviour
       }
       
    }
-
-   public void SetPlayerData(PlayerData playerData)
-   {
-      PlayerHealth playerHealth = gameObject.GetComponent<PlayerHealth>();
-      if (playerHealth)
-      {
-         playerHealth.health = playerData.healthData;
-      }
-      // public bool hasSwordData;
-
-      //public int keySlotData;
-      //public int manaSlotData;
-      //public int ammoSlotData;
-      //public int healthPotionSlotData;
-      //public int permaHealthSlotData;
-}
-   public PlayerData GetPlayerData()
-   {
-      PlayerData playerData = new PlayerData();
-      {
-         // public bool hasSwordData;
- 
-         //public int keySlotData;
-         //public int manaSlotData;
-         //public int ammoSlotData;
-         //public int healthPotionSlotData;
-         //public int permaHealthSlotData;
-      }
-      PlayerHealth playerHealth = gameObject.GetComponent<PlayerHealth>();
-      if (playerHealth)
-      {
-         playerData.healthData = playerHealth.health;
-      }
-      return playerData;
-   }
-
 }

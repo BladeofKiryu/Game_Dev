@@ -18,18 +18,18 @@ public class PauseMenuScript : MonoBehaviour
 
    public void OpenOptionsMenu()
    {
+      SceneLoader.instance.AudioVolumeSlider.value = SceneLoader.instance.AudioVolume;
+      SceneLoader.instance.EFXVolumeSlider.value = SceneLoader.instance.EFXVolume;
+      SceneLoader.instance.CameraSensitivitySlider.value = SceneLoader.instance.CameraSensitivity;
       SetGameObjectState(pauseMenuUI, false);
       SetGameObjectState(optionsMenuUI, true);
    }
 
    public void CloseOptionsMenu()
    {
-      //if (PlayerData.current != null)
-      //{
-         SceneLoader.instance.AudioVolume = SceneLoader.instance.AudioVolumeSlider.value;
-         SceneLoader.instance.EFXVolume = SceneLoader.instance.EFXVolumeSlider.value;
-         SceneLoader.instance.CameraSensitivity = SceneLoader.instance.CameraSensitivitySlider.value;
-      //}
+      SceneLoader.instance.AudioVolume = SceneLoader.instance.AudioVolumeSlider.value;
+      SceneLoader.instance.EFXVolume = SceneLoader.instance.EFXVolumeSlider.value;
+      SceneLoader.instance.CameraSensitivity = SceneLoader.instance.CameraSensitivitySlider.value;
       SetGameObjectState(pauseMenuUI, true);
       SetGameObjectState(optionsMenuUI, false);
    }

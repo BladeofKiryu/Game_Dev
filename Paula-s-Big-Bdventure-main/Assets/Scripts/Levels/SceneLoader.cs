@@ -28,7 +28,7 @@ public class SceneLoader:MonoBehaviour
    public float MaxAudioVolume  = 10;
    public float MaxEFXVolume = 10;
    public float MaxCameraSensitivity = 10;
-   public bool hasSwordData;
+   public bool playerHasPickedSword;
    public int healthData;
    public int keySlotData;
    public int manaSlotData;
@@ -47,17 +47,7 @@ public class SceneLoader:MonoBehaviour
    public Transform playerSceneTarget;
    public void Load(Scene scene)
    {
-      //SaveLoadData.Save();
       SceneManager.LoadScene(scene.ToString());
-      //SaveLoadData.Load();
-      //if (savedPlayer)
-      //{
-      //   playerInteraction = savedPlayer.GetComponent<PlayerInteraction>();
-      //   if (playerInteraction)
-      //   {
-      //      playerInteraction.SetPlayerData(PlayerData.current);
-      //   }
-      //}
    }
 
    void Awake()
@@ -66,7 +56,7 @@ public class SceneLoader:MonoBehaviour
       {
          DontDestroyOnLoad(gameObject);
          instance = this;
-         hasSwordData = false;
+         playerHasPickedSword = false;
          healthData = 0;
          keySlotData = 0;
          manaSlotData = 0;
@@ -76,63 +66,55 @@ public class SceneLoader:MonoBehaviour
          AudioVolume = .2f;
          EFXVolume = .2f;
          CameraSensitivity = .2f;
-         if (AudioVolumeSlider != null)
-         {
-            AudioVolumeSlider.value = AudioVolume;
-         }
-         if (EFXVolumeSlider != null)
-         {
-            EFXVolumeSlider.value = EFXVolume;
-         }
-         if (CameraSensitivitySlider != null)
-         {
-            CameraSensitivitySlider.value = CameraSensitivity;
-         }
+         GetOptionsSliders();
+         //if (AudioVolumeSlider != null)
+         //{
+         //   AudioVolumeSlider.value = AudioVolume;
+         //}
+         //if (EFXVolumeSlider != null)
+         //{
+         //   EFXVolumeSlider.value = EFXVolume;
+         //}
+         //if (CameraSensitivitySlider != null)
+         //{
+         //   CameraSensitivitySlider.value = CameraSensitivity;
+         //}
       }
       else if (instance != this)
       {
-         GameObject canvas = GameObject.Find("Canvas");
-         if(canvas)
-         {
-            foreach (var slider in canvas.transform.GetComponentsInChildren<Slider>(includeInactive: true))
-            {
-               Debug.Log($"slider {slider.name}");
-               string sliderName = slider.name;
-               if (sliderName.ToUpper().Contains("AUDIOVOLUME"))
-               {
-                  slider.value = instance.AudioVolume;
-                  instance.AudioVolumeSlider = slider;
-                  //AudioVolumeSlider.value = AudioVolume;
-               }
-               else if (sliderName.ToUpper().Contains("EFX"))
-               {
-                  slider.value = instance.EFXVolume;
-                  instance.EFXVolumeSlider = slider;
-                  //EFXVolumeSlider.value = EFXVolume;
-               }
-               else if (sliderName.ToUpper().Contains("CAMERA"))
-               {
-                  slider.value = instance.CameraSensitivity;
-                  instance.CameraSensitivitySlider = slider;
-                  //CameraSensitivitySlider.value = CameraSensitivity;
-               }
-            }
-         }
+         GetOptionsSliders();
          Destroy(gameObject);
       }
 
       if (playerSceneTarget == null)
          playerSceneTarget = gameObject.transform;
+   }
 
-      //if (gameObject)
-      //{
-      //   if (PlayerData.current != null)
-      //   {
-      //      AudioVolume.value = PlayerData.current.AudioVolume;
-      //      EFXVolume.value = PlayerData.current.EFXVolume;
-      //      CameraSensitivity.value = PlayerData.current.CameraSensitivity;
-      //   }
-      //}
+   private static void GetOptionsSliders()
+   {
+      GameObject canvas = GameObject.Find("Canvas");
+      if (canvas)
+      {
+         foreach (var slider in canvas.transform.GetComponentsInChildren<Slider>(includeInactive: true))
+         {
+            string sliderName = slider.name;
+            if (sliderName.ToUpper().Contains("AUDIOVOLUME"))
+            {
+               slider.value = instance.AudioVolume;
+               instance.AudioVolumeSlider = slider;
+            }
+            else if (sliderName.ToUpper().Contains("EFX"))
+            {
+               slider.value = instance.EFXVolume;
+               instance.EFXVolumeSlider = slider;
+            }
+            else if (sliderName.ToUpper().Contains("CAMERA"))
+            {
+               slider.value = instance.CameraSensitivity;
+               instance.CameraSensitivitySlider = slider;
+            }
+         }
+      }
    }
 
    public void AssignPlayer(GameObject player)

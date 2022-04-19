@@ -11,6 +11,10 @@ public class SpawnEnemiesToPoints : MonoBehaviour
    // Start is called before the first frame update
    void Awake()
    {
+      //if (SceneLoader.instance.playerHasPickedSword)
+      //{
+      //   return;
+      //}
       foreach (Transform spawnPoint in spawningPoints)
       {
          GameObject enemyClone = Instantiate(objectToSpawn, spawnPoint.position, spawnPoint.rotation, objectParent.transform);

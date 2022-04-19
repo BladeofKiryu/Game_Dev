@@ -19,7 +19,7 @@ public class Player_Movement_True : MonoBehaviour
    CharacterController characterController;
    Vector3 moveDirection = Vector3.zero;
    Vector2 rotation = Vector2.zero;
-
+   Animator animator;
    [HideInInspector]
    public bool canMove = true;
 
@@ -38,6 +38,7 @@ public class Player_Movement_True : MonoBehaviour
 
    void Start()
    {
+      animator = GetComponent<Animator>();
       characterController = GetComponent<CharacterController>();
       rotation.y = transform.eulerAngles.y;
    }
@@ -67,6 +68,17 @@ public class Player_Movement_True : MonoBehaviour
          if (keyboard.spaceKey.ReadValue() > 0f && canMove)
          {
             moveDirection.y = jumpSpeed;
+            if (animator != null)
+            {
+               if (SceneLoader.instance.playerHasPickedSword)
+               {
+                  animator.SetTrigger(AnimationList.PlayerJumpsWithSword);
+               }
+               else
+               {
+                  animator.SetTrigger(AnimationList.PlayerJumpsWithoutSword);
+               }
+            }
          }
       }
 

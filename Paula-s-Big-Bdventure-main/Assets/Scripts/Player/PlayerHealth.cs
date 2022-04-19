@@ -15,15 +15,12 @@ public class PlayerHealth : MonoBehaviour
    {
       health = maximumHealth;
       HideSword();
-      SceneLoader.instance.AssignPlayer(gameObject);
-      if (PlayerData.current != null)
-      {
-         if (PlayerData.current.healthData > 0)
-         {
-            health = PlayerData.current.healthData;
-         }
-      }
+      //SceneLoader.instance.AssignPlayer(gameObject);
       AudioManager.instance.Play(GameSounds.SceneBackground);
+      if (SceneLoader.instance.playerHasPickedSword)
+      {
+         ShowSword();
+      }
    }
 
    //Update is called once per frame

@@ -13,39 +13,6 @@ public class SwordPickup : MonoBehaviour
       if (sword)
       {
          sword.SetActive(false);
-         //sword.GetComponent<Rigidbody>().useGravity = false;
-         //DetachFromParent();
-         //AttachToParent(swordGrip);
-         //EnableSword();
       }
-
-      //if(playerHealth)
-      //{
-      //   playerHealth.ShowSword();
-      //}
-
-      //GameObject battleSword = GameObject.Find("BattleSword");
-      //if(battleSword)
-      //{
-      //   battleSword.SetActive(true);
-      //}
    }
-   //void AttachToParent(GameObject newParent)
-   //{
-   //   sword.transform.position = newParent.transform.position;
-   //   sword.transform.parent = newParent.transform; 
-   //}
-   //void DetachFromParent()
-   //{
-   //   sword.transform.parent = null;
-   //}
-   //void EnableSword()
-   //{
-   //   AimSwordScript aimSwordScript = sword.GetComponent<AimSwordScript>();
-   //   if(aimSwordScript)
-   //   {
-   //      aimSwordScript.EnableSword();
-   //   }
-   //   sword.GetComponent<Rigidbody>().useGravity = true;
-   //}
 }

@@ -1,0 +1,14 @@
+Breathing_Idle-1.m4v
+Death_From_Right-1.m4v
+Great_Sword_Jump-1.m4v
+Great_Sword_Run-1.m4v
+Great_Sword_Run_Backward-1.m4v
+Great_Sword_Strafe_Left-1.m4v
+Great_Sword_Strafe_Right-1.m4v
+Jump-1.m4v
+Left_Strafe-1.m4v
+One_Hand_Sword_Combo-1.m4v
+Pain-1.m4v
+Right_Strafe-1.m4v
+Running-1.m4v
+Running_Backward-1.m4v
